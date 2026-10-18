@@ -1,0 +1,26 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+
+# Environments
+.env
+.venv/
+venv/
+conda-meta/
+
+# MARL logs & checkpoints
+wandb/
+tb_logs/
+results/
+checkpoints/
+*.pt
+*.pth
+*.pkl
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
+EOF

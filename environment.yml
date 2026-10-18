@@ -1,0 +1,13 @@
+name: miscoordination-marl
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      - numpy
+      - torch
+      - gymnasium
+      - mujoco
+      - -e ./external/multiagent_mujoco
