@@ -1,0 +1,60 @@
+\documentclass{article}
+\usepackage[nottoc]{tocbibind}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{url}
+
+\title{Taming Miscoordination in Multi-Agent Learning}
+\author{Karolis Jokubauskas}
+\date{October 2026}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage{}
+
+\section{Introduction}
+
+We are going to start by defining what miscoordination is, then look at some solutions, and then take a deeper dive into 1 type of solution - nested learning.
+
+There are multiple forms of miscoordination and different definitions. We are going to look at simultaneous-update miscoordination in continuous action spaces, and then we are going to recreate it using some simulations.
+
+We are going to use MaMuJoCo\cite{MaMuJoCo}, which is a subset of MuJoCo, to simulate an ant\cite{MaMuJoCo_Ant} with 2 joints (so partioning = "2x4". We are going to treat each leg as its own agent and hence all 4 agents will work together to try make the ant walk forward.
+
+We are going to use C++ as our language for the simulations. We will use Python to take the data from the simulations and plot it so that we can have nice visuals through out this project. 
+
+\subsection{What is miscoordination?}
+
+To illustrate miscoordination, we first consider a two-player differentiable game \cite{Zhong2024}, which provides a mathematical framework for continuous learning settings where multiple interacting objectives govern the system dynamics rather than a single scalar objective function \cite{Foglia2026}.
+
+This is directly relevant to our case since our Ant consists of 2 agents that are continuously learning. The Ant gets a global environmental reward, but each individual agent has its own local neural network that gets updated, and hence we have 2 objectives in our case. Our Ant environment is an example of a two-player differentiable game. Let's have a look at Figure \ref{fig:miscoordination}, which illustrates what miscoordination is in our case.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/seq-vs-sim-v2.png}
+    \caption{Illustration of the miscoordination problem in a two-player differentiable cooperative game. While simultaneous greedy updates (solid red circle) conflict and degrade joint performance, sequential updates (blue star) account for the other agent's update and achieve a higher joint reward. Reproduced from Zhong et al.~\cite{Zhong2024}.}
+    \label{fig:miscoordination}
+\end{figure}
+
+For now, we will set aside the difference between the sequential and simultaneous results, as we are mainly looking at the fact that when the agents optimise for their individual objectives (the striped red circles), the overall joint reward actually decreases (the solid red circle). In our Ant environment, this could happen if the two front legs move one way that improves their local objective, and the two back legs move another way that improves their own local objective, but then overall the Ant falls over since the two pairs of legs are not coordinating with each other.
+
+Test
+
+\section{How people have tried fixing miscoordination}
+
+\subsection{Idea 1}
+
+\subsection{Idea 2}
+
+\section{Using Nested Learning}
+
+\section{Conclusion}
+
+\newpage{}
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

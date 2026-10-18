@@ -1,16 +1,16 @@
-# Byte-compiled / cache
+# --- Python / Byte-compiled / Cache ---
 __pycache__/
 *.py[cod]
 *.egg-info/
 .eggs/
 
-# Environments
+# --- Environments ---
 .env
 .venv/
 venv/
 conda-meta/
 
-# MARL logs & checkpoints
+# --- MARL Logs & Checkpoints ---
 wandb/
 tb_logs/
 results/
@@ -19,8 +19,40 @@ checkpoints/
 *.pth
 *.pkl
 
-# OS / IDE
+# --- LaTeX Auxiliary & Build Garbage ---
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex
+*.synctex(busy)
+*.synctex.gz
+*.Synctex.gz(busy)
+*.toc
+*.vrb
+*.xdv
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist
+*-blx.aux
+*-blx.bib
+_minted*
+
+# --- OS / IDE / Temp ---
 .DS_Store
 .vscode/
 .idea/
-EOF
+install-tinytex.bat
