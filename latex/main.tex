@@ -52,13 +52,19 @@ This is directly relevant to our case since our Ant consists of 2 agents that ar
 
 For now, we will set aside the difference between the sequential and simultaneous results, as we are mainly looking at the fact that when the agents optimise for their individual objectives (the striped red circles), the overall joint reward actually decreases (the solid red circle). In our Ant environment, this could happen if the two front legs move one way that improves their local objective, and the two back legs move another way that improves their own local objective, but then overall the Ant falls over since the two pairs of legs are not coordinating with each other.
 
-\section{The baseline}
+\subsection{Why does miscoordination occur?}
 
-\section{How people have tried fixing miscoordination}
 
-\subsection{Idea 1}
 
-\subsection{Idea 2}
+\section{Taming miscoordination}
+
+We are going to have a look at some algorithms proposed in the paper by Kuba et al.~\cite{Kuba2021HATRPO}.
+
+\subsection{Multi-Agent Policy Iteration with Monotonic Improvement Guarantee}
+
+\subsection{HATRPO}
+
+\subsection{HAPPO}
 
 \section{Using Nested Learning}
 
