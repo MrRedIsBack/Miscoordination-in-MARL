@@ -17,13 +17,25 @@
 
 \section{Introduction}
 
+This bit is unfinished and wrong, leaving it to a later date
+
 We are going to start by defining what miscoordination is, then look at some solutions, and then take a deeper dive into 1 type of solution - nested learning.
 
 There are multiple forms of miscoordination and different definitions. We are going to look at simultaneous-update miscoordination in continuous action spaces, and then we are going to recreate it using some simulations.
 
 We are going to use MaMuJoCo\cite{MaMuJoCo}, which is a subset of MuJoCo, to simulate an ant\cite{MaMuJoCo_Ant} with 2 joints (so partioning = "2x4". We are going to treat each leg as its own agent and hence all 4 agents will work together to try make the ant walk forward.
 
-We are going to use C++ as our language for the simulations. We will use Python to take the data from the simulations and plot it so that we can have nice visuals through out this project. 
+\subsection{Using the Ant environment to illustrate miscoordination}
+We are going to use a physics engine called MaMuJoCo\cite{MaMuJoCo} to simulate an Ant environment\cite{MaMuJoCo_Ant}. MaMuJoCo is a subset of MuJoCo, which is a physics engine that allows us to simulate robots and other physical systems. MaMuJoCo is `Multi Agent MuJoCo` and has pre-built environments for multi-agent simulations. The Ant environment consists of an ant with 4 legs, and we are going to treat the back legs as an agent and the front legs as another agent. Each agent will have its own local neural network that gets updated based on the global environmental reward. 
+
+Figure \ref{fig:ant_2x4} shows the Ant environment. There are other environments with more agents, joints, and different set ups. I have chosen the simplest one so we can focus on the maths behind the miscoordination problem.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/ant_2x4.png}
+    \caption{The Ant environment with 2 agents (front legs and back legs) and 4 joints each. Figure from MaMuJoCo Ant environment\cite{MaMuJoCo_Ant}.}
+    \label{fig:ant_2x4}
+\end{figure}
 
 \subsection{What is miscoordination?}
 
@@ -40,7 +52,6 @@ This is directly relevant to our case since our Ant consists of 2 agents that ar
 
 For now, we will set aside the difference between the sequential and simultaneous results, as we are mainly looking at the fact that when the agents optimise for their individual objectives (the striped red circles), the overall joint reward actually decreases (the solid red circle). In our Ant environment, this could happen if the two front legs move one way that improves their local objective, and the two back legs move another way that improves their own local objective, but then overall the Ant falls over since the two pairs of legs are not coordinating with each other.
 
-Test
 
 \section{How people have tried fixing miscoordination}
 
