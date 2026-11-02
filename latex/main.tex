@@ -2,6 +2,7 @@
 \usepackage[nottoc]{tocbibind}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{url}
+\usepackage{amssymb}
 
 \title{Taming Miscoordination in Multi-Agent Learning}
 \author{Karolis Jokubauskas}
@@ -54,7 +55,42 @@ For now, we will set aside the difference between the sequential and simultaneou
 
 \subsection{Why does miscoordination occur?}
 
+\section{The Dynamics of RL in CMS}
+THE SECTION TITLE NEEDS TO BE CHANGED.
 
+\subsection{Premilinary Definitions and Notation}
+
+
+
+\subsection{Q-Learning}
+
+Q-learning~\cite{watkins1992q} is an algorithm often used for single-agent learning, but it can also be applied to multi-agent settings~\cite{claus1998dynamics}. In a stateless repeated game, the agent maintains a ``Q-table'' representing the expected reward for each action. Following the simplified formulation of~\cite{claus1998dynamics}, the values are updated by the following formula:
+$$
+Q(a) \leftarrow Q(a) + \alpha(r - Q(a))
+$$
+where $\alpha$ ($0 \leq \alpha \leq 1$) is the learning rate and $r$ is the reward received by performing the action.
+
+\subsection{Boltzmann Exploration} 
+
+Exploration is the process of choosing actions, and exploitative exploration \cite{watkins1992q} is the process of choosing the best action with probability p.
+
+A popular exploitative exploration strategy is the Boltzmann Exploration:
+
+$$
+\mathbb{P}(a) = \frac{e^{\frac{Q(a)}{T}}}{\sum_{a'}^{}e^{\frac{Q(a')}{T}}} 
+$$
+
+where $a$ is the action, $a' \in A$ , and T is the temperature.
+
+could we simulate some embedded systems stuff here? Can we look at how T affects how many iterations needed to meet P=0.99 or something like that?? Gemini suggests Slotted ALOHA Medium Access Control (MAC)
+
+Let's have a look at a formula that takes Q-Learning and applies it to join multi agents where the agents are joint action learners \cite{claus1998dynamics}
+
+Instead of using the ``q-value``, let's use the expected value as described in \cite{claus1998dynamics}:
+
+$$
+EV(a^i) = \sum_{a^{-i} \in A_{-i} }^{} Q(a^{-i} \cup \{a^i\}) \Pi_{j \neq i}^{}\mathbb{P}_{a^{-i}[j]}^{i}
+$$
 
 \section{Taming miscoordination}
 
