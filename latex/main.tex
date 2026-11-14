@@ -3,6 +3,12 @@
 \usepackage{graphicx} % Required for inserting images
 \usepackage{url}
 \usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{cleveref}
+
+\theoremstyle{definition}    % upright body text, correct for these
+\newtheorem{assumption}{Assumption}[section]
+\newtheorem{definition}{Definition}[section]
 
 \title{Taming Miscoordination in Multi-Agent Learning}
 \author{Karolis Jokubauskas}
@@ -26,17 +32,26 @@ There are multiple forms of miscoordination and different definitions. We are go
 
 We are going to use MaMuJoCo\cite{MaMuJoCo}, which is a subset of MuJoCo, to simulate an ant\cite{MaMuJoCo_Ant} with 2 joints (so partioning = "2x4". We are going to treat each leg as its own agent and hence all 4 agents will work together to try make the ant walk forward.
 
-\subsection{Using the Ant environment to illustrate miscoordination}
-We are going to use a physics engine called MaMuJoCo\cite{MaMuJoCo} to simulate an Ant environment\cite{MaMuJoCo_Ant}. MaMuJoCo is a subset of MuJoCo, which is a physics engine that allows us to simulate robots and other physical systems. MaMuJoCo is `Multi Agent MuJoCo` and has pre-built environments for multi-agent simulations. The Ant environment consists of an ant with 4 legs, and we are going to treat the back legs as an agent and the front legs as another agent. Each agent will have its own local neural network that gets updated based on the global environmental reward. 
+\subsection{The Application}
+First, let us discuss where we are going to apply our Multi Agent Reinforcement Learning. The idea is to tame miscoordination in MARL with an application to Slotted ALOHA.
 
-Figure \ref{fig:ant_2x4} shows the Ant environment. There are other environments with more agents, joints, and different set ups. I have chosen the simplest one so we can focus on the maths behind the miscoordination problem.
+As described in the book \cite{bertsekas1992data}, we are going to look at multiple nodes transmitting packets of data. We are going to treat each node as an agent, and so we will have multiple agents trying to transmit packets of data. If multiple agents try at the same time, they will collide, and our receiver will recieve nothing; that is our miscoordination. And at the same time, if multiple agents transmit nothing, then we will simply receive no data, which is also miscoordination. To summarise what we are trying to achieve, "The problem is somehow to coordinate the use of the channel so that exactly one node is transmitting for an appreciable fraction of the time. " \cite{bertsekas1992data}
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.8\textwidth]{figures/ant_2x4.png}
-    \caption{The Ant environment with 2 agents (front legs and back legs) and 4 joints each. Figure from MaMuJoCo Ant environment\cite{MaMuJoCo_Ant}.}
-    \label{fig:ant_2x4}
-\end{figure}
+Since I like cars, we are going to imagine we have multiple cars communicating with a radio tower over WiFi. So our MARL is simply going to find when it should send its data. The beauty of this is that this is a solved problem and so we can directly compare our MARL to the slotted ALOHA system.
+
+The idealised slotted multiaccess model is defined by the following
+assumptions, which follow \cite{bertsekas1992data}.
+
+\begin{assumption}[Slotted system]\label{asm:slots}
+  Time is indexed by $t \in \mathbb{N}$. Every packet is of equal length
+  and occupies exactly one unit interval $[t,\,t+1)$, called slot $t$.
+  All nodes share a common slot boundary, so a transmission begun in
+  slot $t$ is complete before slot $t+1$ begins.
+\end{assumption}
+
+Now we can have a look at the Slotted Aloha algorithm.
+
+
 
 \subsection{What is miscoordination?}
 
